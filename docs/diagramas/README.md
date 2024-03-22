@@ -1,2 +1,1 @@
-# Diagramas de classe
-Coloque aqui todas as versões do seu diagrama de classes. Cada versão deve começar com um número de dois dígitos, na ordem crescente.
+[Copy of Untitled Diagram.drawio (2).pdf](https://github.com/DisciplinasProgramacao/poo-tp-2024-1-bonde-dos-sem-grupo/files/14715529/Copy.of.Untitled.Diagram.drawio.2.pdf)

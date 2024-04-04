@@ -31,19 +31,6 @@ public class Requisicao
         // Pode ser aprimorado
     }
 }
-
-public class Cliente
-{
-    public string Nome { get; set; }
-    // Adicione outras propriedades relevantes aqui
-}
-
-public class Mesa
-{
-    public int Numero { get; set; }
-    // Adicione outras propriedades relevantes aqui
-}
-
 class Program
 {
     static void Main(string[] args)

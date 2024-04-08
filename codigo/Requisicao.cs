@@ -31,19 +31,3 @@ public class Requisicao
         // Pode ser aprimorado
     }
 }
-class Program
-{
-    static void Main(string[] args)
-    {
-        // Exemplo de uso:
-        Cliente cliente1 = new Cliente { Nome = "Joao" };
-        Mesa mesa1 = new Mesa { Numero = 1 };
-        Requisicao req = new Requisicao();
-        req.criarRequisicao(cliente1, 4, mesa1);
-
-        // Simulando o tempo de ocupação da mesa...
-        System.Threading.Thread.Sleep(5000);
-
-        req.encerrarRequisicao();
-    }
-}

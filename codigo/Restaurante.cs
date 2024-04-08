@@ -1,95 +1,93 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 
 public class Restaurante
 {
-    private List <Mesa> mesas;
-    private List <Requisicao> filaEspera;
+    private List<Mesa> mesas;
+    private List<Requisicao> filaEspera;
 
-    //Construtor 
+    // Construtor
     public Restaurante()
     {
-        //Inicializa
+        // Inicializa
         this.mesas = new List<Mesa>();
         this.filaEspera = new List<Requisicao>();
     }
 
     /// <summary>
-    /// Definir uma mesa para uma requisição
+    /// Define uma mesa.
     /// </summary>
     /// <param name="requisicao"></param>
-    /// <returns></returns>
+    /// <returns>Mensagem de sucesso.</returns>
     public string DefinirMesa(Requisicao requisicao)
     {
-        //Percorre todas as mesas
-        foreach (var mesa in this.mesas)
+        // Percorre todas as mesas
+        for (int i = 0; i < mesas.Count; i++)
         {
-            //Verifica se a mesa está disponível
-            if (mesa.verificaDisponibilidade())
+            // Verifica se a mesa está disponível
+            if (mesas[i].verificaDisponibilidade())
             {
-                //Define a mesa
-                mesa.status = false;
-                mesa.lugaresMesa = requisicao.numClientes;
-                mesa.idMesa = this.mesas.Count + 1;
-                //Retorna mensagem de sucesso
-                return $"Mesa {mesa.idMesa} definida para a requisição de {requisicao.cliente.nome}.";
+                // Define a mesa para a requisição
+                mesas[i].status = false;
+                mesas[i].lugaresMesa = requisicao.numClientes;
+                mesas[i].idMesa = mesas.Count + 1;
+                // Mensagem de sucesso
+                return $"Mesa {mesas[i].idMesa} definida para a requisição de {requisicao.cliente.nome}.";
             }
         }
-        //Retorna mensagem de falha
+        // Mensagem de falha
         return "Mesa não disponível.";
     }
 
     /// <summary>
-    /// Liberar mesa para o cliente
+    /// Libera uma mesa.
     /// </summary>
     /// <param name="requisicao"></param>
-    /// <returns></returns>
+    /// <returns>Mensagem de sucesso.</returns>
     public string LiberarMesa(Requisicao requisicao)
     {
-        //Percorre todas as mesas
-        foreach (var mesa in this.mesas)
+        // Percorre todas as mesas
+        for (int i = 0; i < mesas.Count; i++)
         {
-            //Verifica se a mesa corresponde à mesa da requisição
-            if (mesa.idMesa == requisicao.mesa.idMesa)
+            // Verifica se é a mesa da requisição
+            if (mesas[i].idMesa == requisicao.mesa.idMesa)
             {
-                //Libera a mesa
-                mesa.status = true;
-                //Retorna mensagem de sucesso
-                return $"Mesa {mesa.idMesa} liberada.";
+                // Libera a mesa
+                mesas[i].status = true;
+                // Mensagem de sucesso
+                return $"Mesa {mesas[i].idMesa} liberada.";
             }
         }
-        //Retorna mensagem de falha
+        // Mensagem de falha
         return "Mesa não encontrada.";
     }
 
     /// <summary>
-    /// Adiciona uma requisição à fila de espera
+    /// Adiciona uma requisição para a lista de espera.
     /// </summary>
     /// <param name="requisicao"></param>
-    public void AdicionarNaFilaEspera(Requisicao requisicao)
+    public void AdicionarNaListaEspera(Requisicao requisicao)
     {
-        //Adiciona a requisição à fila de espera
-        this.filaEspera.Add(requisicao);
+        filaEspera.Add(requisicao);
     }
 
     /// <summary>
-    /// Atender um cliente da fila de espera
+    /// Atende uma requisição da lista de espera.
     /// </summary>
-    public void AtenderCliente()
+    /// <param name="requisicao"></param>
+    public void AtenderRequisicao(Requisicao requisicao)
     {
-        // Verifica se há clientes na fila de espera
-        if (this.filaEspera.Count > 0)
+        // Verifica se a requisição está na lista de espera
+        if (filaEspera.Contains(requisicao))
         {
-            //Obtém a primeira requisição da fila de espera
-            var requisicao = this.filaEspera[0];
-            //Remove a requisição da fila de espera
-            this.filaEspera.RemoveAt(0);
-            //Mensagem de atendimento com sucesso
-            Console.WriteLine($"Atendendo o cliente {requisicao.cliente.nome} na mesa {requisicao.mesa.idMesa}.");
+            // Remove a requisição da lista de espera
+            filaEspera.Remove(requisicao);
+            // Mensagem de falha
+            Console.WriteLine($"Requisição de {requisicao.numClientes} clientes atendida.");
         }
         else
         {
-            //Mensagem se não tiver clientes esperando
-            Console.WriteLine("Não há clientes na fila de espera.");
+            Console.WriteLine("Requisição não encontrada na lista de espera.");
         }
     }
 }

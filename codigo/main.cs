@@ -4,39 +4,24 @@ class Program
 {
     static void Main()
     {
-        // Criando o restaurante
-        var restaurante = new Restaurante(new List<Mesa>(), new List<Requisicao>());
+        // Criando instância do restaurante
+        Restaurante restaurante = new Restaurante();
 
-        // Cadastrar cliente
-        Console.WriteLine("Cadastro de Cliente");
-        Console.Write("Nome do cliente: ");
-        string nomeCliente = Console.ReadLine();
-        Console.Write("CPF do cliente: ");
-        string cpfCliente = Console.ReadLine();
+        // Cadastrando cliente
+        Cliente cliente1 = new Cliente(1, "João");
+        restaurante.CadastrarCliente(cliente1);
 
-        var cliente = new Cliente(nomeCliente, cpfCliente);
+        // Criando mesa
+        Mesa mesa1 = new Mesa(1);
+        restaurante.Mesas.Add(mesa1);
 
-        // Criar uma requisição
-        Console.WriteLine("\nAtendimento de Requisição");
-        Console.Write("Número de clientes: ");
-        int numClientes = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Id da mesa: ");
-        int idMesa = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Quantidade de lugares na mesa: ");
-        int lugaresMesa = Convert.ToInt32(Console.ReadLine());
-        Console.Write("Data da requisição (DD/MM/AAAA): ");
-        DateTime dataReq = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", null);
-        Console.Write("Hora de entrada (HH:MM): ");
-        DateTime horaEntrada = DateTime.ParseExact(Console.ReadLine(), "HH:mm", null);
-        Console.Write("Hora de saída (HH:MM): ");
-        DateTime horaSaida = DateTime.ParseExact(Console.ReadLine(), "HH:mm", null);
+        // Criando requisição
+        Requisicao requisicao1 = restaurante.CriarRequisicao(1, cliente1);
 
-        var mesa = new Mesa(idMesa, lugaresMesa);
-        var requisicao = new Requisicao(cliente, numClientes, mesa, dataReq, horaEntrada, horaSaida);
+        // Alocando requisição à mesa
+        mesa1.AlocarRequisicao(requisicao1);
 
-        // Atender a requisição
-        restaurante.AtenderRequisicao(requisicao);
-
-        Console.WriteLine("\nRequisição atendida com sucesso!");
+        // Encerrando requisição
+        requisicao1.Encerrar();
     }
 }

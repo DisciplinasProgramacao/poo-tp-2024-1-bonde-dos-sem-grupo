@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 // Classe para representar o cardápio
 public class Cardapio

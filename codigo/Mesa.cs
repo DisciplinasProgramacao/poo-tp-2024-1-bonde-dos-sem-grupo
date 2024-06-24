@@ -2,15 +2,15 @@ using System;
 
 public class Mesa
 {
-    private int _idMesa;
-    private int _lugaresMesa;
-    private bool _status;
+    public int IdMesa { get; }
+    public int LugaresMesa { get; }
+    public bool Status { get; set; }
 
     public Mesa(int idMesa, int lugaresMesa, bool status)
     {
-        _idMesa = idMesa;
-        _lugaresMesa = lugaresMesa;
-        _status = status;
+        IdMesa = idMesa;
+        LugaresMesa = lugaresMesa;
+        Status = status;
     }
 
     public bool VerificaDisponibilidade()

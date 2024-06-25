@@ -1,14 +1,30 @@
-﻿// Implementação básica da interface IProduto
+using system;
+
 public abstract class Produto : IProduto
 {
-    public string Nome { get; set; }
-    public double Preco { get; set; }
-    public int Codigo { get; set; }
+    private string nome;
+    private double preco;
+    private int codigo;
 
     protected Produto(string nome, double preco, int codigo)
     {
-        Nome = nome;
-        Preco = preco;
-        Codigo = codigo;
+        this.nome = nome;
+        this.preco = preco;
+        this.codigo = codigo;
+    }
+
+    public string GetNome()
+    {
+        return nome;
+    }
+
+    public double GetPreco()
+    {
+        return preco;
+    }
+
+    public int GetCodigo()
+    {
+        return codigo;
     }
 }

@@ -1,7 +1,8 @@
-﻿// Interface para os produtos
+using system;
+
 public interface IProduto
 {
-    string Nome { get; set; }
-    double Preco { get; set; }
-    int Codigo { get; }
+    string GetNome();
+    double GetPreco();
+    int GetCodigo();
 }

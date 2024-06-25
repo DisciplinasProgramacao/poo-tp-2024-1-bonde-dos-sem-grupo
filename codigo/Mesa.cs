@@ -2,19 +2,39 @@ using System;
 
 public class Mesa
 {
-    public int IdMesa { get; }
-    public int LugaresMesa { get; }
-    public bool Status { get; set; }
+    private int idMesa;
+    private int lugaresMesa;
+    private bool status;
 
     public Mesa(int idMesa, int lugaresMesa, bool status)
     {
-        IdMesa = idMesa;
-        LugaresMesa = lugaresMesa;
-        Status = status;
+        this.idMesa = idMesa;
+        this.lugaresMesa = lugaresMesa;
+        this.status = status;
+    }
+
+    public int GetIdMesa()
+    {
+        return idMesa;
+    }
+
+    public int GetLugaresMesa()
+    {
+        return lugaresMesa;
+    }
+
+    public bool GetStatus()
+    {
+        return status;
+    }
+
+    public void SetStatus(bool status)
+    {
+        this.status = status;
     }
 
     public bool VerificaDisponibilidade()
     {
-        return Status;
+        return status;
     }
 }

@@ -2,47 +2,62 @@ using System;
 
 public class Requisicao
 {
-    public int Id { get; private set; }
-    public Cliente Cliente { get; private set; }
-    public int NumClientes { get; private set; }
-    public Mesa Mesa { get; set; }
-    public DateTime DataReq { get; private set; }
-    public DateTime HoraEntrada { get; private set; }
-    public DateTime HoraSaida { get; private set; }
-    private List<IProduto> produtosConsumidos;
+    private int id;
+    private Cliente cliente;
+    private int numClientes;
+    private List<IProduto> produtos;
+    private Mesa mesa;
+    private static int idCounter = 1;
 
     public Requisicao(Cliente cliente, int numClientes)
     {
-        Cliente = cliente;
-        NumClientes = numClientes;
-        DataReq = DateTime.Now;
-        HoraEntrada = DateTime.Now;
-        produtosConsumidos = new List<IProduto>();
+        this.id = idCounter++;
+        this.cliente = cliente;
+        this.numClientes = numClientes;
+        produtos = new List<IProduto>();
+    }
+
+    public int GetNumClientes()
+    {
+        return numClientes;
+    }
+
+    public Cliente GetCliente()
+    {
+        return cliente;
+    }
+
+    public Mesa GetMesa()
+    {
+        return mesa;
+    }
+
+    public void SetMesa(Mesa mesa)
+    {
+        this.mesa = mesa;
     }
 
     public void AdicionarProduto(IProduto produto)
     {
-        produtosConsumidos.Add(produto);
-        Console.WriteLine($"Produto {produto.Nome} adicionado à requisição.");
+        produtos.Add(produto);
+        Console.WriteLine($"Produto {produto.GetNome()} adicionado à requisição.");
     }
 
     public void EncerrarRequisicao()
     {
-        HoraSaida = DateTime.Now;
-        Console.WriteLine($"Requisição encerrada.");
+        Console.WriteLine($"Requisição {id} encerrada.");
     }
 
     public void MostrarConta()
     {
-        decimal total = 0;
-        Console.WriteLine($"Conta da Requisição:");
+        Console.WriteLine("\nConta:");
 
-        foreach (var produto in produtosConsumidos)
+        foreach (var produto in produtos)
         {
-            Console.WriteLine($"{produto.Nome} - R$ {produto.Preco}");
-            total += (decimal)produto.Preco; // Conversão explícita para decimal
+            Console.WriteLine($"{produto.GetNome()} - R$ {produto.GetPreco()}");
         }
 
-        Console.WriteLine($"Total: R$ {total}");
+        double total = produtos.Sum(p => p.GetPreco());
+        Console.WriteLine($"\nTotal: R$ {total}");
     }
 }

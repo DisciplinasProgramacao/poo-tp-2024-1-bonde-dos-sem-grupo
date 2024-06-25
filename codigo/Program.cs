@@ -4,8 +4,22 @@ class Program
 {
     static void Main(string[] args)
     {
+        // Código principal que gerencia a interação com o usuário.
+        // Cria instâncias e chama métodos para realizar operações com o restaurante.
+
         // Criando instância do restaurante
         Restaurante restaurante = new Restaurante();
+        // Adicionando mesas conforme especificado
+        restaurante.AdicionarMesa(new Mesa(1, 4, true));
+        restaurante.AdicionarMesa(new Mesa(2, 4, true));
+        restaurante.AdicionarMesa(new Mesa(3, 4, true));
+        restaurante.AdicionarMesa(new Mesa(4, 4, true));
+        restaurante.AdicionarMesa(new Mesa(5, 6, true));
+        restaurante.AdicionarMesa(new Mesa(6, 6, true));
+        restaurante.AdicionarMesa(new Mesa(7, 6, true));
+        restaurante.AdicionarMesa(new Mesa(8, 6, true));
+        restaurante.AdicionarMesa(new Mesa(9, 8, true));
+        restaurante.AdicionarMesa(new Mesa(10, 8, true));
 
         Console.WriteLine("Bem-vindo ao OO Comidinhas Veganas!");
 
@@ -16,10 +30,12 @@ class Program
         {
             Console.WriteLine("\nEscolha uma opção:");
             Console.WriteLine("1. Digitar CPF e criar requisição");
-            Console.WriteLine("2. Mostrar cardápio");
-            Console.WriteLine("3. Selecionar produto e adicionar à requisição");
-            Console.WriteLine("4. Fechar conta e mostrar detalhes");
-            Console.WriteLine("5. Sair");
+            Console.WriteLine("2. Mostrar cardápio restaurante");
+            Console.WriteLine("3. Selecionar produto e adicionar à requisição restaurante");
+            Console.WriteLine("4. Fechar conta e mostrar detalhes restaurante");
+            Console.WriteLine("5. Mostrar cardápio café OOCV");
+            Console.WriteLine("6. Selecionar produto e fazer pedido no café OOCV");
+            Console.WriteLine("7. Sair");
 
             Console.Write("Opção: ");
             string opcao = Console.ReadLine();
@@ -38,14 +54,14 @@ class Program
                     Cliente clienteExistente = restaurante.BuscarClientePorCpf(cpf);
                     if (clienteExistente != null)
                     {
-                        Console.WriteLine($"CPF encontrado na base de dados. Bem-vindo de volta, {clienteExistente.Nome}!");
+                        Console.WriteLine($"CPF encontrado na base de dados. Bem-vindo de volta, {clienteExistente.GetNome()}!");
                     }
                     else
                     {
                         Console.Write("CPF não encontrado na base de dados. Por favor, digite seu nome: ");
                         string nomeCliente = Console.ReadLine();
                         clienteExistente = restaurante.CadastrarNovoCliente(nomeCliente, cpf);
-                        Console.WriteLine($"Cliente {clienteExistente.Nome} cadastrado com sucesso!");
+                        Console.WriteLine($"Cliente {clienteExistente.GetNome()} cadastrado com sucesso!");
                     }
 
                     // Cria uma requisição para o cliente
@@ -55,7 +71,7 @@ class Program
                     break;
 
                 case "2":
-                    MostrarCardapio(restaurante.Cardapio);
+                    MostrarCardapioRestaurante(restaurante.GetCardapio());
                     break;
 
                 case "3":
@@ -65,14 +81,14 @@ class Program
                         break;
                     }
 
-                    MostrarCardapio(restaurante.Cardapio);
+                    MostrarCardapioRestaurante(restaurante.GetCardapio());
                     Console.Write("Digite o código do produto: ");
-                    int codigoProduto = int.Parse(Console.ReadLine());
+                    int codigoProdutoRestaurante = int.Parse(Console.ReadLine());
 
-                    IProduto produtoSelecionado = SelecionarProduto(restaurante.Cardapio, codigoProduto);
-                    if (produtoSelecionado != null)
+                    IProduto produtoSelecionadoRestaurante = SelecionarProduto(restaurante.GetCardapio(), codigoProdutoRestaurante);
+                    if (produtoSelecionadoRestaurante != null)
                     {
-                        requisicao.AdicionarProduto(produtoSelecionado);
+                        requisicao.AdicionarProduto(produtoSelecionadoRestaurante);
                     }
                     else
                     {
@@ -87,13 +103,35 @@ class Program
                         break;
                     }
 
-                    requisicao.EncerrarRequisicao();
-                    requisicao.MostrarConta();
-                    restaurante.LiberarMesa(requisicao);
+                    Console.Write("Digite o número da mesa: ");
+                    int numeroMesa = int.Parse(Console.ReadLine());
+
+                    string resultadoConta = restaurante.FecharConta(numeroMesa);
+                    Console.WriteLine(resultadoConta);
                     requisicao = null; // Limpa a requisição atual após fechar a conta
                     break;
 
                 case "5":
+                    MostrarCardapioCafe(restaurante.GetCardapio());
+                    break;
+
+                case "6":
+                    MostrarCardapioCafe(restaurante.GetCardapio());
+                    Console.Write("Digite o código do produto: ");
+                    int codigoProdutoCafe = int.Parse(Console.ReadLine());
+
+                    IProduto produtoSelecionadoCafe = SelecionarProdutoCafe(restaurante.GetCardapio(), codigoProdutoCafe);
+                    if (produtoSelecionadoCafe != null)
+                    {
+                        Console.WriteLine($"Pedido realizado no café OOCV: {produtoSelecionadoCafe.GetNome()}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Código de produto inválido.");
+                    }
+                    break;
+
+                case "7":
                     Console.WriteLine("Saindo...");
                     continuar = false;
                     break;
@@ -116,33 +154,47 @@ class Program
         return true;
     }
 
-    private static void MostrarCardapio(Cardapio cardapio)
+    private static void MostrarCardapioRestaurante(Cardapio cardapio)
     {
-        Console.WriteLine("\nCardápio:");
+        Console.WriteLine("\nCardápio Restaurante:");
 
-        // Mostrar comidas
-        Console.WriteLine("\nComidas:");
-        var comidas = cardapio.ListarComidas();
-        for (int i = 0; i < comidas.Count; i++)
+        var produtos = cardapio.ListarProdutos().Where(p => p.GetType() != typeof(CafeComida) && p.GetType() != typeof(CafeBebida)).ToList();
+        for (int i = 0; i < produtos.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {comidas[i].Nome} - R$ {comidas[i].Preco}");
+            Console.WriteLine($"{i + 1}. {produtos[i].GetNome()} - R$ {produtos[i].GetPreco()}");
         }
+    }
 
-        // Mostrar bebidas
-        Console.WriteLine("\nBebidas:");
-        var bebidas = cardapio.ListarBebidas();
-        for (int i = 0; i < bebidas.Count; i++)
+    private static void MostrarCardapioCafe(Cardapio cardapio)
+    {
+        Console.WriteLine("\nCardápio Café OOCV:");
+
+        var produtosCafe = cardapio.ListarProdutos().Where(p => p.GetType() == typeof(CafeComida) || p.GetType() == typeof(CafeBebida)).ToList();
+        for (int i = 0; i < produtosCafe.Count; i++)
         {
-            Console.WriteLine($"{i + 1}. {bebidas[i].Nome} - R$ {bebidas[i].Preco}");
+            Console.WriteLine($"{i + 1}. {produtosCafe[i].GetNome()} - R$ {produtosCafe[i].GetPreco()}");
         }
     }
 
     private static IProduto SelecionarProduto(Cardapio cardapio, int codigo)
     {
-        var produtos = cardapio.ListarProdutos();
+        var produtos = cardapio.ListarProdutos().Where(p => !(p.GetType() == typeof(CafeComida) || p.GetType() == typeof(CafeBebida))).ToList();
         if (codigo >= 1 && codigo <= produtos.Count)
         {
             return produtos[codigo - 1];
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    private static IProduto SelecionarProdutoCafe(Cardapio cardapio, int codigo)
+    {
+        var produtosCafe = cardapio.ListarProdutos().Where(p => p.GetType() == typeof(CafeComida) || p.GetType() == typeof(CafeBebida)).ToList();
+        if (codigo >= 1 && codigo <= produtosCafe.Count)
+        {
+            return produtosCafe[codigo - 1];
         }
         else
         {

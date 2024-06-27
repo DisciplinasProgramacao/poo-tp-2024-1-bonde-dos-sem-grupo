@@ -1,0 +1,14 @@
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\bin\Debug\net8.0\Danilo'sFood.exe
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\bin\Debug\net8.0\Danilo'sFood.deps.json
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\bin\Debug\net8.0\Danilo'sFood.runtimeconfig.json
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\bin\Debug\net8.0\Danilo'sFood.dll
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\bin\Debug\net8.0\Danilo'sFood.pdb
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.AssemblyInfoInputs.cache
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.AssemblyInfo.cs
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.csproj.CoreCompileInputs.cache
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.dll
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\refint\Danilo'sFood.dll
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.pdb
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\Danilo'sFood.genruntimeconfig.cache
+C:\Users\Danilo\source\repos\Danilo'sFood\Danilo'sFood\obj\Debug\net8.0\ref\Danilo'sFood.dll

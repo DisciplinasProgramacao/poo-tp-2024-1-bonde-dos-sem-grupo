@@ -1,8 +1,15 @@
-using system;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public interface IProduto
+namespace Danilo_sFood
 {
-    string GetNome();
-    double GetPreco();
-    int GetCodigo();
+    public interface IProduto
+    {
+        string GetNome();
+        double GetPreco();
+        int GetCodigo();
+    }
 }

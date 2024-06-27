@@ -1,23 +1,30 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Cliente
+namespace Danilo_sFood
 {
-    private string nome;
-    private string cpf;
-
-    public Cliente(string nome, string cpf)
+    public class Cliente
     {
-        this.nome = nome;
-        this.cpf = cpf;
-    }
+        private string nome;
+        private string cpf;
 
-    public string GetNome()
-    {
-        return nome;
-    }
+        public Cliente(string nome, string cpf)
+        {
+            this.nome = nome;
+            this.cpf = cpf;
+        }
 
-    public string GetCpf()
-    {
-        return cpf;
+        public string GetNome()
+        {
+            return nome;
+        }
+
+        public string GetCpf()
+        {
+            return cpf;
+        }
     }
 }

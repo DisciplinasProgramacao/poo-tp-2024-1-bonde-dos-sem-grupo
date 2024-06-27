@@ -1,30 +1,37 @@
-using system;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public abstract class Produto : IProduto
+namespace Danilo_sFood
 {
-    private string nome;
-    private double preco;
-    private int codigo;
-
-    protected Produto(string nome, double preco, int codigo)
+    public abstract class Produto : IProduto
     {
-        this.nome = nome;
-        this.preco = preco;
-        this.codigo = codigo;
-    }
+        private string nome;
+        private double preco;
+        private int codigo;
 
-    public string GetNome()
-    {
-        return nome;
-    }
+        protected Produto(string nome, double preco, int codigo)
+        {
+            this.nome = nome;
+            this.preco = preco;
+            this.codigo = codigo;
+        }
 
-    public double GetPreco()
-    {
-        return preco;
-    }
+        public string GetNome()
+        {
+            return nome;
+        }
 
-    public int GetCodigo()
-    {
-        return codigo;
+        public double GetPreco()
+        {
+            return preco;
+        }
+
+        public int GetCodigo()
+        {
+            return codigo;
+        }
     }
 }

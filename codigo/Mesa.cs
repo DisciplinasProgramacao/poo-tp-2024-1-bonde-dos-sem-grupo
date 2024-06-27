@@ -1,40 +1,48 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Mesa
+namespace Danilo_sFood
 {
-    private int idMesa;
-    private int lugaresMesa;
-    private bool status;
-
-    public Mesa(int idMesa, int lugaresMesa, bool status)
+    public class Mesa
     {
-        this.idMesa = idMesa;
-        this.lugaresMesa = lugaresMesa;
-        this.status = status;
+        private int idMesa;
+        private int lugaresMesa;
+        private bool status;
+
+        public Mesa(int idMesa, int lugaresMesa, bool status)
+        {
+            this.idMesa = idMesa;
+            this.lugaresMesa = lugaresMesa;
+            this.status = status;
+        }
+
+        public int GetIdMesa()
+        {
+            return idMesa;
+        }
+
+        public int GetLugaresMesa()
+        {
+            return lugaresMesa;
+        }
+
+        public bool GetStatus()
+        {
+            return status;
+        }
+
+        public void SetStatus(bool status)
+        {
+            this.status = status;
+        }
+
+        public bool VerificaDisponibilidade()
+        {
+            return status;
+        }
     }
 
-    public int GetIdMesa()
-    {
-        return idMesa;
-    }
-
-    public int GetLugaresMesa()
-    {
-        return lugaresMesa;
-    }
-
-    public bool GetStatus()
-    {
-        return status;
-    }
-
-    public void SetStatus(bool status)
-    {
-        this.status = status;
-    }
-
-    public bool VerificaDisponibilidade()
-    {
-        return status;
-    }
 }

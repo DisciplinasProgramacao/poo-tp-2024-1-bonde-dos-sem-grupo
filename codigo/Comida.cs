@@ -1,8 +1,15 @@
-using system;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-public class Comida : Produto
+namespace Danilo_sFood
 {
-    public Comida(string nome, double preco, int codigo) : base(nome, preco, codigo)
+    public class Comida : Produto
     {
+        public Comida(string nome, double preco, int codigo) : base(nome, preco, codigo)
+        {
+        }
     }
 }
